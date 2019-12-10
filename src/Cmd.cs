@@ -45,6 +45,14 @@ namespace Devastus
             }
 
             /// <summary>
+            /// Clear stored commands from the command map
+            /// </summary>
+            public static void Clear()
+            {
+                cmdMap.Clear();
+            }
+
+            /// <summary>
             /// Invoke the given command with arguments
             /// </summary>
             /// <param name="method"></param>
