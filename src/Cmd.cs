@@ -11,6 +11,7 @@ namespace Devastus
         /// </summary>
         public static class Cmd
         {
+            private const string HELP_CMD = "help";
             private static Dictionary<Command, MethodInfo> cmdMap;
         
             /// <summary>
@@ -25,22 +26,33 @@ namespace Devastus
                     Init();
                 }
 
-                if (args != null && args.Length > 0)
+                if (args != null && args.Length > 0 && args[0] != HELP_CMD)
                 {
-                    Command cmd = new Command(args[0]);
-                    MethodInfo method;
-                    if (cmdMap.TryGetValue(cmd, out method))
+                    try
                     {
-                        return Invoke(method, args.Slice(1));
+                        Command cmd = new Command(args[0]);
+                        MethodInfo method;
+                        if (cmdMap.TryGetValue(cmd, out method))
+                        {
+                            Invoke(method, args.Slice(1));
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception($"Command '{cmd.Name}' does not exist");
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
                         Color.Write(ConsoleColor.Red, ConsoleColor.Black, "[ERROR]");
-                        Console.WriteLine($": command '{cmd.Name}' does not exist");
+                        Console.WriteLine($": {e.Message}");
                     }
                 }
-
-                Help();
+                else
+                {
+                    Help();
+                }
+                
                 return false;
             }
 
@@ -58,19 +70,15 @@ namespace Devastus
             /// <param name="method"></param>
             /// <param name="args"></param>
             /// <returns></returns>
-            private static bool Invoke(MethodInfo method, string[] args)
+            private static void Invoke(MethodInfo method, string[] args)
             {
                 try
                 {
                     method.Invoke(null, new object[] { args });
-                    return true;
                 }
                 catch (TargetInvocationException tie)
                 {
-                    var ex = tie.InnerException;
-                    Color.Write(ConsoleColor.Red, ConsoleColor.Black, "[ERROR]");
-                    Console.WriteLine(": " + ex.Message);
-                    return false;
+                    throw tie.InnerException;
                 }
             }
 
