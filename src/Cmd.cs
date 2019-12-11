@@ -44,8 +44,7 @@ namespace Devastus
                     }
                     catch (Exception e)
                     {
-                        Log.WriteColor(ConsoleColor.Red, ConsoleColor.Black, "[ERROR]");
-                        Log.WriteLine($": {e.Message}");
+                        Log.Error(e.Message);
                     }
                 }
                 else
