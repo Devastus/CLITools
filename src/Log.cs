@@ -91,16 +91,28 @@ namespace Devastus
                 Console.ResetColor();
             }
 
+            /// <summary>
+            /// Set the level of what messages get printed to the log
+            /// </summary>
+            /// <param name="level"></param>
             public static void SetLogLevel(Level level)
             {
                 logLevel = level;
             }
 
+            /// <summary>
+            /// Toggle timestamp in log messages
+            /// </summary>
+            /// <param name="timestamp"></param>
             public static void ToggleTimestamp(bool timestamp)
             {
                 useTimestamp = timestamp;
             }
 
+            /// <summary>
+            /// Print an error message
+            /// </summary>
+            /// <param name="obj"></param>
             public static void Error(params object[] obj)
             {
                 if (logLevel < Level.Error) return;
@@ -116,6 +128,10 @@ namespace Devastus
                 Console.Write("\n");
             }
 
+            /// <summary>
+            /// Print a warning message
+            /// </summary>
+            /// <param name="obj"></param>
             public static void Warn(params object[] obj)
             {
                 if (logLevel < Level.Warn) return;
@@ -131,6 +147,10 @@ namespace Devastus
                 Console.Write("\n");
             }
 
+            /// <summary>
+            /// Print an info message
+            /// </summary>
+            /// <param name="obj"></param>
             public static void Info(params object[] obj)
             {
                 if (logLevel < Level.Info) return;
@@ -146,6 +166,10 @@ namespace Devastus
                 Console.Write("\n");
             }
 
+            /// <summary>
+            /// Print a debug message
+            /// </summary>
+            /// <param name="obj"></param>
             public static void Debug(params object[] obj)
             {
                 if (logLevel < Level.Debug) return;
@@ -161,6 +185,10 @@ namespace Devastus
                 Console.Write("\n");
             }
 
+            /// <summary>
+            /// Print a trace message
+            /// </summary>
+            /// <param name="obj"></param>
             public static void Trace(params object[] obj)
             {
                 if (logLevel < Level.Trace) return;
