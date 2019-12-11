@@ -24,7 +24,7 @@ namespace Devastus
                 Error = ConsoleColor.Red,
                 Warn = ConsoleColor.Yellow,
                 Info = ConsoleColor.Green,
-                Debug = ConsoleColor.White,
+                Debug = ConsoleColor.Cyan,
                 Trace = ConsoleColor.Gray
             }
 
@@ -64,9 +64,8 @@ namespace Devastus
             /// <param name="obj"></param>
             public static void WriteColor(ConsoleColor foreground, ConsoleColor background, params object[] obj)
             {
-                Console.ForegroundColor = foreground;
-                Console.BackgroundColor = background;
-                for(int i = 0; i < obj.Length; i++)
+                SetConsoleColor(foreground, background);
+                for (int i = 0; i < obj.Length; i++)
                 {
                     Console.Write(obj[i]);
                 }
@@ -81,8 +80,7 @@ namespace Devastus
             /// <param name="obj"></param>
             public static void WriteLineColor(ConsoleColor foreground, ConsoleColor background, params object[] obj)
             {
-                Console.ForegroundColor = foreground;
-                Console.BackgroundColor = background;
+                SetConsoleColor(foreground, background);
                 for (int i = 0; i < obj.Length; i++)
                 {
                     Console.Write(obj[i]);
@@ -116,8 +114,7 @@ namespace Devastus
             public static void Error(params object[] obj)
             {
                 if (logLevel < Level.Error) return;
-                Console.ForegroundColor = (ConsoleColor)LevelColor.Error;
-                Console.BackgroundColor = ConsoleColor.Black;
+                SetConsoleColor((ConsoleColor)LevelColor.Error);
                 PrintTimestamp();
                 Console.Write("[ERROR] ");
                 Console.ResetColor();
@@ -135,8 +132,7 @@ namespace Devastus
             public static void Warn(params object[] obj)
             {
                 if (logLevel < Level.Warn) return;
-                Console.ForegroundColor = (ConsoleColor)Level.Warn;
-                Console.BackgroundColor = ConsoleColor.Black;
+                SetConsoleColor((ConsoleColor)LevelColor.Warn);
                 PrintTimestamp();
                 Console.Write("[WARN] ");
                 Console.ResetColor();
@@ -154,8 +150,7 @@ namespace Devastus
             public static void Info(params object[] obj)
             {
                 if (logLevel < Level.Info) return;
-                Console.ForegroundColor = (ConsoleColor)Level.Info;
-                Console.BackgroundColor = ConsoleColor.Black;
+                SetConsoleColor((ConsoleColor)LevelColor.Info);
                 PrintTimestamp();
                 Console.Write("[INFO] ");
                 Console.ResetColor();
@@ -173,8 +168,7 @@ namespace Devastus
             public static void Debug(params object[] obj)
             {
                 if (logLevel < Level.Debug) return;
-                Console.ForegroundColor = (ConsoleColor)Level.Debug;
-                Console.BackgroundColor = ConsoleColor.Black;
+                SetConsoleColor((ConsoleColor)LevelColor.Debug);
                 PrintTimestamp();
                 Console.Write("[DEBUG] ");
                 Console.ResetColor();
@@ -192,8 +186,7 @@ namespace Devastus
             public static void Trace(params object[] obj)
             {
                 if (logLevel < Level.Trace) return;
-                Console.ForegroundColor = (ConsoleColor)Level.Trace;
-                Console.BackgroundColor = ConsoleColor.Black;
+                SetConsoleColor((ConsoleColor)LevelColor.Trace);
                 PrintTimestamp();
                 Console.Write("[TRACE] ");
                 Console.ResetColor();
@@ -210,6 +203,12 @@ namespace Devastus
                 {
                     Console.Write($"[{System.DateTime.Now.ToString()}] ");
                 }
+            }
+
+            private static void SetConsoleColor(ConsoleColor foreground = ConsoleColor.White, ConsoleColor background = ConsoleColor.Black)
+            {
+                Console.ForegroundColor = foreground;
+                Console.BackgroundColor = background;
             }
         }
     }
