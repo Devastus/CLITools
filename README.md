@@ -14,8 +14,5 @@ public static void ExampleCommand(string[] args)
 	}
 }
 ```
-This function can then be run with the following command:
-```
-CompiledExecutable.exe example arg1 arg2 arg3...
-```
+
 Function needs to be static, return void and take in an array of string arguments. Arguments need to be parsed inside the function itself.
