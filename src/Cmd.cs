@@ -44,8 +44,8 @@ namespace Devastus
                     }
                     catch (Exception e)
                     {
-                        Color.Write(ConsoleColor.Red, ConsoleColor.Black, "[ERROR]");
-                        Console.WriteLine($": {e.Message}");
+                        Log.WriteColor(ConsoleColor.Red, ConsoleColor.Black, "[ERROR]");
+                        Log.WriteLine($": {e.Message}");
                     }
                 }
                 else
@@ -113,7 +113,7 @@ namespace Devastus
             /// </summary>
             private static void Help()
             {
-                Color.WriteLine(ConsoleColor.Yellow, ConsoleColor.Black, "Available commands:");
+                Log.WriteLineColor(ConsoleColor.Yellow, ConsoleColor.Black, "Available commands:");
                 var keys = cmdMap.Keys;
                 if (keys.Count > 0)
                 {
@@ -121,13 +121,17 @@ namespace Devastus
                     {
                         MethodInfo method = cmdMap[key];
                         var parameters = method.GetParameters();
-                        Color.Write(ConsoleColor.Green, ConsoleColor.Black, key.Name);
-                        Console.WriteLine(" - " + key.Description);
+                        Log.WriteColor(ConsoleColor.Green, ConsoleColor.Black, key.Name);
+                        if (key.Description.Length > 0)
+                        {
+                            Log.Write(" - " + key.Description);
+                        }
+                        Log.Write("\n");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("None available");
+                    Log.WriteLine("None available");
                 }
             }
         }

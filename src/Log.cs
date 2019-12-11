@@ -7,15 +7,40 @@ namespace Devastus
         /// <summary>
         /// Utilities for colorizing console printing
         /// </summary>
-        public static class Color
+        public static class Log
         {
+            /// <summary>
+            /// Wrapper for Console.Write
+            /// </summary>
+            /// <param name="obj"></param>
+            public static void Write(params object[] obj)
+            {
+                for (int i = 0; i < obj.Length; i++)
+                {
+                    Console.Write(obj[i]);
+                }
+            }
+
+            /// <summary>
+            /// Wrapper for Console.WriteLine
+            /// </summary>
+            /// <param name="obj"></param>
+            public static void WriteLine(params object[] obj)
+            {
+                for (int i = 0; i < obj.Length; i++)
+                {
+                    Console.Write(obj[i]);
+                }
+                Console.Write("\n");
+            }
+
             /// <summary>
             /// Write to the console with color
             /// </summary>
             /// <param name="foreground"></param>
             /// <param name="background"></param>
             /// <param name="obj"></param>
-            public static void Write(ConsoleColor foreground, ConsoleColor background, params object[] obj)
+            public static void WriteColor(ConsoleColor foreground, ConsoleColor background, params object[] obj)
             {
                 Console.ForegroundColor = foreground;
                 Console.BackgroundColor = background;
@@ -32,7 +57,7 @@ namespace Devastus
             /// <param name="foreground"></param>
             /// <param name="background"></param>
             /// <param name="obj"></param>
-            public static void WriteLine(ConsoleColor foreground, ConsoleColor background, params object[] obj)
+            public static void WriteLineColor(ConsoleColor foreground, ConsoleColor background, params object[] obj)
             {
                 Console.ForegroundColor = foreground;
                 Console.BackgroundColor = background;
